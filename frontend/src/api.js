@@ -1,4 +1,4 @@
-const BASE = "/api";
+const BASE = "https://junction-task.onrender.com";
 
 async function handle(res) {
   if (!res.ok) {
