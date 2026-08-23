@@ -9,15 +9,28 @@ import apiRoutes from "./routes/api.js";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Vercel URL from Render environment variables
-const CLIENT_ORIGIN =
-  process.env.CLIENT_ORIGIN || "http://localhost:5173";
+// Allowed frontend origins
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://junction-task-azure.vercel.app",
+  "https://junction-task-ayushsingh16022006-7433s-projects.vercel.app",
+  process.env.CLIENT_ORIGIN,
+].filter(Boolean);
 
 app.use(helmet());
 
 app.use(
   cors({
-    origin: [CLIENT_ORIGIN, "http://localhost:5173"],
+    origin(origin, callback) {
+      // Allow requests without an Origin (Postman, health checks)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("CORS blocked"));
+    },
     methods: ["GET", "POST"],
     credentials: true,
   })
