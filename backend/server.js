@@ -9,6 +9,9 @@ import apiRoutes from "./routes/api.js";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const app = express();
+app.set("trust proxy", 1);
+
 // Allowed frontend origins
 const allowedOrigins = [
   "http://localhost:5173",
