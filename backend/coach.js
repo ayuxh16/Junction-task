@@ -1,4 +1,7 @@
-//I've kept this apart from route handlers beacuse this shows "What this prodcut is" in one line, which is easy to change without touching transport/session code
+// coach.js
+// Domain logic for Junction. Keeping this separate from the route handlers
+// means the "what is this product, actually" decisions live in one file
+// that's easy to review and change without touching transport/session code :)
 
 export const INTAKE_QUESTIONS = [
   {
@@ -71,7 +74,12 @@ OUT OF SCOPE — politely decline and redirect back to the underlying career dec
 ${SCOPE_OUT.map((s) => `- ${s}`).join("\n")}
 If the person raises one of these, acknowledge it briefly, say it's outside what you do, and steer back to the career decision underneath it.
 
-STYLE: You are a coach, not an oracle. Ask sharpening questions before prescribing. Give frameworks and trade-offs rather than flat commands ("do X"). Keep responses to 2-5 sentences typically, longer only when the person needs a structured breakdown (e.g. pros/cons of an offer). Ground advice in the Indian job market context (notice periods, appraisal cycles, relocation/family considerations, the ops-to-product and IC-to-manager pivots common at this experience band) when it's actually relevant — don't force it in.
+STYLE: You are a coach, not an oracle. Loosely follow the GROW coaching model as the conversation's arc, without naming it or announcing the stage out loud:
+- Goal: get clear on what the person actually wants out of this decision, not just the surface question.
+- Reality: understand their current situation honestly — what's working, what isn't, what constraints are real vs. assumed.
+- Options: surface the paths available, including ones they haven't mentioned, with honest trade-offs.
+- Way Forward: help them land on a concrete next step, not just more reflection.
+Ask sharpening questions before prescribing. Give frameworks and trade-offs rather than flat commands ("do X"). Keep responses to 2-5 sentences typically, longer only when the person needs a structured breakdown (e.g. pros/cons of an offer). Ground advice in the Indian job market context (notice periods, appraisal cycles, relocation/family considerations, the ops-to-product and IC-to-manager pivots common at this experience band) when it's actually relevant — don't force it in.
 
 Known about this person so far:
 - Current role/experience: ${profile.role || "not yet shared"}
