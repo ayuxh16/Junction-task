@@ -7,12 +7,10 @@ import rateLimit from "express-rate-limit";
 import apiRoutes from "./routes/api.js";
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-
-const app = express();
 app.set("trust proxy", 1);
 
-// Allowed frontend origins
+const PORT = process.env.PORT || 5000;
+
 const allowedOrigins = [
   "http://localhost:5173",
   "https://junction-task-azure.vercel.app",
@@ -25,7 +23,6 @@ app.use(helmet());
 app.use(
   cors({
     origin(origin, callback) {
-      // Allow requests without an Origin (Postman, health checks)
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
