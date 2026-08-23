@@ -1,4 +1,5 @@
-const BASE = import.meta.env.VITE_API_URL;
+const BASE =
+  import.meta.env.VITE_API_URL || "https://junction-task.onrender.com";
 
 async function handle(res) {
   if (!res.ok) {
@@ -17,13 +18,13 @@ async function handle(res) {
   return res.json();
 }
 
-// Get intake questions
+// GET /api/intake
 export async function fetchIntakeQuestions() {
   const res = await fetch(`${BASE}/api/intake`);
   return handle(res);
 }
 
-// Create a new coaching session
+// POST /api/session
 export async function createSession(profile) {
   const res = await fetch(`${BASE}/api/session`, {
     method: "POST",
@@ -36,7 +37,7 @@ export async function createSession(profile) {
   return handle(res);
 }
 
-// Send chat message
+// POST /api/chat
 export async function sendMessage(sessionId, message) {
   const res = await fetch(`${BASE}/api/chat`, {
     method: "POST",
